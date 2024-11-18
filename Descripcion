@@ -1,0 +1,8 @@
+/lavanderia-app
+├── main.py          # Archivo principal para ejecutar la aplicación.
+├── database.py      # Módulo para gestionar la base de datos.
+├── pedidos.py       # Módulo para manejar pedidos.
+├── finanzas.py      # Módulo para registrar ingresos y gastos.
+├── clientes.py      # Módulo para gestionar clientes.
+├── ui.py            # Módulo para el menú interactivo.
+
