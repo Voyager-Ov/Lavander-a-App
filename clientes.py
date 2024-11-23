@@ -1,3 +1,9 @@
+import funciones_Add
+
+
+Archivo_de_Clientes = "Clientes.csv"
+
+
 class Clientes:    # Creo la clase Clientes para que tenga los atributos vistos
     def __init__(self, dni, nombre, apellido, telefono, email, direccion, pedidos, subscripcion):
         self.dni = dni
@@ -33,8 +39,10 @@ def crear_Cliente():       # defino la funcion para crear al cliente
     direccion = input("Direccion: ")
     subscripcion = input("Subscripcion: ")
     pedidos = "falta encontrar funcion para la lista de pedidos"
+    # Instancio el objeto con los parametros que nos pasan
     cliente = Clientes(dni, nombre, apellido, telefono, email, direccion, pedidos, subscripcion)
-    return cliente
+    # uso la funcion de Funciones add para cargar el objeto cliente al archivo de Clientes
+    Funciones_Add.Cargar_objeto_al_Archivo(cliente, Archivo_de_Clientes)
 
 
 def mostrar_Clientes(cliente):
