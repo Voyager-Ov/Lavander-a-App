@@ -19,5 +19,20 @@ def Cargar_objeto_al_Archivo(objeto, archivo):
         arch.close()
 
 
-def Buscador_objeto_en_Archivo(objeto, archivo):
+def ordenar_Archivo(archivo, parametro):
+    """
+    ordena a los objetos del archivo por el parametro de menor a mayor
+    :param archivo:
+    :param parametro:
+    :return: Archivo ordenado por el parametro
+    """
+    if os.path.exists(archivo):
+        arc = open(archivo, 'r')
+        clientes = pickle.load(arc)
+        arc.close()
+        clientes_ordenados = sorted(clientes, key=lambda persona: persona.parametro)
+        
+
+
+def Buscador_Coincidencias_en_Archivo(objeto, parametro, archivo):
     pass
