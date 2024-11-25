@@ -4,7 +4,7 @@ import os.path
 Archivo_de_Clientes = "Clientes.pkl"
 
 
-class Clientes:    # Creo la clase Clientes para que tenga los atributos vistos
+class Cliente:    # Creo la clase Clientes para que tenga los atributos vistos
     def __init__(self, dni, nombre, apellido, telefono, email, direccion, pedidos, subscripcion):
         self.dni = dni
         self.nombre = nombre
@@ -40,7 +40,7 @@ def crear_Cliente():       # defino la funcion para crear al cliente
     subscripcion = "falta encrontar lka funcion para las subscripciuones"
     pedidos = "falta encrontar lka funcion para las pedidos"
     # Instancio el objeto con los parametros que nos pasan
-    cliente = Clientes(dni, nombre, apellido, telefono, email, direccion, pedidos, subscripcion)
+    cliente = Cliente(dni, nombre, apellido, telefono, email, direccion, pedidos, subscripcion)
     # uso la funcion de Funciones add para cargar el objeto cliente al archivo de Clientes
     print("Los datos del clinete son los siguientes: ")
     print(cliente)
@@ -70,11 +70,28 @@ def mostrar_Clientes():
         arc.close()
 
 
-def mostrar_Clientes_unico():
-    atributo = input("Ingrese que quiere buscar(ejemplo: dni o nombre o apellido o telefono o email o direccion): ").lower()
-    valor = input("ingrese el/la" + atributo + "del cliente: ")
+def mostrar_Clientes_unico(valor=None, atributo=None):
+    if valor is None:
+        valor = input("ingrese el/la" + atributo + "del cliente: ")
+    if atributo is None:
+        atributo = input("Ingrese que quiere buscar(ejemplo: dni o nombre o apellido o telefono o email o direccion): ").lower()
     cliente = buscar_cliente(valor, atributo)
-    print(cliente)
+    if cliente is not None:
+        print(cliente)
+    else:
+        print("El cliente no se encontro")
+
+
+def buscar_Clientes_unico(valor=None, atributo=None):
+    if valor is None:
+        valor = input("ingrese el/la" + atributo + "del cliente: ")
+    if atributo is None:
+        atributo = input("Ingrese que quiere buscar(ejemplo: dni o nombre o apellido o telefono o email o direccion): ").lower()
+    cliente = buscar_cliente(valor, atributo)
+    if cliente is not None:
+        return cliente
+    else:
+        print("El cliente no se encontro")
 
 
 def buscar_cliente(valor, atributo):
@@ -93,22 +110,18 @@ def buscar_cliente(valor, atributo):
 
 
 def cambiar_Datos_Cliente(cliente):
-    eleccion = input("Ingrese la opcion que desee: ")
-    if eleccion == "1":
-        print("Para cambiar los datos del cliente ingrese complete los siguientes campos: ")
-        dni = input("DNI: ")
-        nombre = input("Nombre: ")
-        apellido = input("Apellido: ")
-        telefono = input("Telefono: ")
-        email = input("Email: ")
-        direccion = input("Direccion: ")
-        subscripcion = "falta encrontar lka funcion para las subscripciuones"
-        pedidos = "falta encontrar funcion para la lista de pedidos"
-        # Instancio el objeto con los parametros que nos pasan
-        cliente = Clientes(dni, nombre, apellido, telefono, email, direccion, pedidos, subscripcion)
-        return cliente
-    else:
-        return cliente
+    print("Para cambiar los datos del cliente ingrese complete los siguientes campos: ")
+    dni = input("DNI: ")
+    nombre = input("Nombre: ")
+    apellido = input("Apellido: ")
+    telefono = input("Telefono: ")
+    email = input("Email: ")
+    direccion = input("Direccion: ")
+    subscripcion = "falta encrontar lka funcion para las subscripciuones"
+    pedidos = "falta encontrar funcion para la lista de pedidos"
+    # Instancio el objeto con los parametros que nos pasan
+    cliente = Cliente(dni, nombre, apellido, telefono, email, direccion, pedidos, subscripcion)
+    return cliente
 
 
 def eliminar_Cliente():
