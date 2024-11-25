@@ -2,6 +2,7 @@ import os.path
 import pickle
 Archivo_de_Clientes = "Clientes.pkl"
 
+
 def Cargar_objeto_al_Archivo(objeto, archivo):
     """
     Carga un objeto en un archivo, si el archivo existe lo abre en modo 'a'
@@ -42,14 +43,12 @@ def ordenar_archivo(archivo, parametro):
             pickle.dump(clientes_ordenados, arc)
 
 
-
-
-def Buscador_Coincidencias_en_Archivo_mio(parametro, archivo, coincidencia):
+def Buscador_Coincidencias_en_Archivo_mio(atributo, archivo, coincidencia):
     if os.path.exists(archivo):
         arc = open(archivo, "rb")
         clientes = pickle.load(arc)
         for i in clientes:
-            if getattr(i, parametro) == coincidencia:
+            if getattr(i, atributo) == coincidencia:
                 return True  # Se encontró al menos una coincidencia
         return False  # No se encontraron coincidencias
     
