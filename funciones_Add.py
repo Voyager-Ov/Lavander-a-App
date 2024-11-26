@@ -20,11 +20,32 @@ def Cargar_objeto_al_Archivo(objeto, archivo):
         arch.close()
 
 
+def buscar_objeto_enArchivo(atributo=None, valor=None, archivo=None):
+    if archivo is None:
+        archivo = input("Ingrese el nombre del archivo: ")
+    if atributo is None:
+        atributo = input("Ingrese el atributo: ")
+    if valor is None:
+        valor = input("Ingrese el valor: ")
+    if os.path.exists(archivo):
+        arc = open(archivo, "rb")
+        t = os.path.getsize(archivo)
+        arc.seek(0)
+        atributo_list = []
+        while arc.tell() < t:
+            tick = pickle.load(arc)
+            atributo_list.append(tick)
+        for i in atributo_list:
+            if getattr(i, atributo) == valor:
+                return i
+        return None
+
+
 def ordenar_archivo(archivo, parametro):
     """
     Ordena a los objetos del archivo por el parámetro de menor a mayor.
     
-    :param archivo: nombre del archivo que contiene los objetos.
+    :param archivo: Nombre del archivo que contiene los objetos.
     :param parametro: El atributo por el cual se ordenarán los objetos.
     :return: Archivo ordenado por el parámetro.
     """
@@ -74,22 +95,3 @@ def Buscador_Coincidencias_en_Archivo_blackbox(parametro, archivo, coincidencia)
     return False  # No se encontraron coincidencias o el archivo no existe
 
 
-def buscar_objeto(atributo=None, valor=None, archivo=None):
-    if archivo is None:
-        archivo = input("Ingrese el nombre del archivo: ")
-    if atributo is None:
-        atributo = input("Ingrese el atributo: ")
-    if valor is None:
-        valor = input("Ingrese el valor: ")
-    if os.path.exists(archivo):
-        arc = open(archivo, "rb")
-        t = os.path.getsize(archivo)
-        arc.seek(0)
-        atributo_list = []
-        while arc.tell() < t:
-            tick = pickle.load(arc)
-            atributo_list.append(tick)
-        for i in atributo_list:
-            if getattr(i, atributo) == valor:
-                return i
-        return None

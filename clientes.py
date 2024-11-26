@@ -70,39 +70,20 @@ def mostrar_Clientes():
         arc.close()
 
 
-def mostrar_Clientes_unico(valor=None, atributo=None):
-    if valor is None:
-        valor = input("ingrese el/la" + atributo + "del cliente: ")
+def buscar_cliente(valor=None, atributo=None):
     if atributo is None:
-        atributo = input("Ingrese que quiere buscar(ejemplo: dni o nombre o apellido o telefono o email o direccion): ").lower()
-    cliente = buscar_cliente(valor, atributo)
-    if cliente is not None:
-        print(cliente)
-    else:
-        print("El cliente no se encontro")
-
-
-def buscar_Clientes_unico(valor=None, atributo=None):
+        atributo = input(
+            "Ingrese que quiere buscar(ejemplo: dni o nombre o apellido o telefono o email o direccion): ").lower()
     if valor is None:
-        valor = input("ingrese el/la" + atributo + "del cliente: ")
-    if atributo is None:
-        atributo = input("Ingrese que quiere buscar(ejemplo: dni o nombre o apellido o telefono o email o direccion): ").lower()
-    cliente = buscar_cliente(valor, atributo)
-    if cliente is not None:
-        return cliente
-    else:
-        print("El cliente no se encontro")
-
-
-def buscar_cliente(valor, atributo):
+        valor = input(f"ingrese el valor {atributo} del cliente: ")
     if os.path.exists(Archivo_de_Clientes):
         arc = open(Archivo_de_Clientes, "rb")
         t = os.path.getsize(Archivo_de_Clientes)
-        cliente = []
+        clientes = []
         while arc.tell() < t:
             tick = pickle.load(arc)
-            cliente.append(tick)
-        for i in cliente:
+            clientes.append(tick)
+        for i in clientes:
             if getattr(i, atributo) == valor:
                 return i
             else:
@@ -125,57 +106,22 @@ def cambiar_Datos_Cliente(cliente):
 
 
 def eliminar_Cliente():
-    print("Para eliminar el cliente primero seleccione el metodo de busquda: ")
-    print("1. Buscar por DNI")
-    print("2. Buscar por nombre")
-    print("3. Buscar por apellido")
-    print("4. Buscar por telefono")
-    print("5. Buscar por email")
-    print("6. Buscar por direccion")
-    opcion = int(input("Ingrese su opcion: "))
-    while 1 <= opcion <=6:
-        if opcion == 1:
-            atributo = "dni"
-            valor = input("Ingrese el DNI: ")
-            break
-        elif opcion == 2:
-            atributo = "nombre"
-            valor = input("Ingrese el nombre: ")
-            break
-        elif opcion == 3:
-            atributo = "apellido"
-            valor = input("Ingrese el apellido: ")
-            break
-        elif opcion == 4:
-            atributo = "telefono"
-            valor = input("Ingrese el telefono: ")
-            break
-        elif opcion == 5:
-            atributo = "email"
-            valor = input("Ingrese el email: ")
-            break
-        elif opcion == 6:
-            atributo = "direccion"
-            valor = input("Ingrese la direccion: ")
-            break
-        else:
-            print("valor Incorrecto")
+    cliElim = buscar_cliente()
     if os.path.exists(Archivo_de_Clientes):
         arch_cli = open(Archivo_de_Clientes, "rb")
         t = os.path.getsize(Archivo_de_Clientes)
-        cliente = []
+        clientes = []
         while arch_cli.tell() < t:
             tick = pickle.load(arch_cli)
-            cliente.append(tick)
-        cli_del = buscar_cliente(valor, atributo)
-        print("El clienmte que quiere eliminar es: ")
-        print(cli_del)
-        if cli_del is not None:
+            clientes.append(tick)
+        if cliElim is not None:
+            print("El cliente que quiere eliminar es: ")
+            print(cliElim)
             print("Esta seguro de borrar el cliente?", "\n1. Si", "\n2. No")
             eleccion = int(input("Ingrese su opcion: "))
             if eleccion == 1:
-                cliente.remove(cli_del)
-                fa.Cargar_objeto_al_Archivo(cliente, Archivo_de_Clientes)
+                clientes.remove(cliElim)
+                fa.Cargar_objeto_al_Archivo(clientes, Archivo_de_Clientes)
                 print("El cliente se elimino correctamente")
             else:
                 print("El cliente no se elimino")
