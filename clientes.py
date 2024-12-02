@@ -55,11 +55,14 @@ def crear_Cliente():       # defino la funcion para crear al cliente
             print("El cliente se guardo correctamente")
         else:
             print("valor Incorrecto")
-    fa.Cargar_objeto_al_Archivo(cliente, Archivo_de_Clientes)
+    fa.cargar_objeto_al_archivo(cliente, Archivo_de_Clientes)
     return cliente
 
 
 def mostrar_Clientes():
+    print("          ///CLIENTES////")
+    fa.mostrar_objetos(Archivo_de_Clientes, "Cliente")
+
     print("          ///CLIENTES////")
     if os.path.exists(Archivo_de_Clientes):
         arc = open(Archivo_de_Clientes, "rb")
@@ -121,7 +124,7 @@ def eliminar_Cliente():
             eleccion = int(input("Ingrese su opcion: "))
             if eleccion == 1:
                 clientes.remove(cliElim)
-                fa.Cargar_objeto_al_Archivo(clientes, Archivo_de_Clientes)
+                fa.cargar_objeto_al_archivo(clientes, Archivo_de_Clientes)
                 print("El cliente se elimino correctamente")
             else:
                 print("El cliente no se elimino")

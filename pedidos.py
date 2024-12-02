@@ -49,7 +49,7 @@ def crear_Pedido():
     if opcion == 1:
         cliente = cli.crear_Cliente()
     else:
-        cliente = cli.buscar_Clientes_unico()
+        cliente = cli.buscar_cliente()
     print("Para crear el pedido complete los siguientes campos: ")
     estado = input("Estado: ")
     tiporopa = input("Tipo de Ropa: ")
@@ -67,7 +67,7 @@ def crear_Pedido():
         pedido = cambiar_Datos_Pedido(pedido)
     else:
         print("valor Incorrecto")
-    fa.Cargar_objeto_al_Archivo(pedido, Archivo_de_pedidos)
+    fa.cargar_objeto_al_archivo(pedido, Archivo_de_pedidos)
     print("El pedido se guardo correctamente")
     return pedido
 
