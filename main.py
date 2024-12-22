@@ -1,37 +1,29 @@
-import flet as ft
+import clientes as cli
+import pedidos as ped
 
 
-def main(page: ft.Page):
-    def mostrar_detalles(e):
-        nombre = nombre_input.value
-        edad = edad_input.value
-        if nombre and edad:
-            detalle_text.value = f"Nombre: {nombre}, Edad: {edad}"
-            detalle_text.update()
+def main():
+    while True:
+        print("Menu de Opciones:")
+        print("1. cretar cliente")
+        print("2. crear pedido ")
+        print("3. mostrar clientes")
+        print("4. mostrar pedidos")
+        print("5. salir")
+
+        opcion = input("Seleccione una opción: ")
+
+        if opcion == '1':
+            print("Has seleccionado crear cliente")
+            cli.crear_Cliente()
+        elif opcion == '2':
+            print("Has seleccionado crear pedido")
+            ped.crear_Pedido()
+        elif opcion == '3':
+            print("Has seleccionado mostrar cleintes")
+            cli.mostrar_Clientes()
+        elif opcion == '4':
+            print("Has seleccionado mostrar pedidos")
+            ped.mostrar_pedidos()
         else:
-            page.dialog = ft.AlertDialog(
-                title=ft.Text("Advertencia"),
-                content=ft.Text("Por favor, introduce el nombre y la edad."),
-                actions=[
-                    ft.TextButton("OK", on_click=lambda e: page.dialog.close())
-                ],
-            )
-            page.dialog.open = True
-            page.update()
-
-    page.title = "Cliente App"
-
-    nombre_input = ft.TextField(label="Nombre")
-    edad_input = ft.TextField(label="Edad")
-    mostrar_button = ft.ElevatedButton(text="Mostrar Detalles", on_click=mostrar_detalles)
-    detalle_text = ft.Text()
-
-    page.add(
-        nombre_input,
-        edad_input,
-        mostrar_button,
-        detalle_text,
-    )
-
-
-ft.app(target=main)
+            print("Opción no válida, por favor seleccione una opción válida.")
